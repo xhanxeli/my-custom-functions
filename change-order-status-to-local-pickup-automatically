@@ -1,0 +1,23 @@
+// Change order status Local Pickup if delivery method is Local Pickup
+
+add_action( 'woocommerce_thankyou', 'xhanxeli_shipping_update_order_status', 10, 1 );
+function xhanxeli_shipping_update_order_status( $order_id ) {
+    if ( ! $order_id ) return;
+
+    $search = 'pickup'; // The needle to search in the shipping method ID
+
+    // Get an instance of the WC_Order object
+    $order = wc_get_order( $order_id );
+
+    // Get the WC_Order_Item_Shipping object data
+    foreach($order->get_shipping_methods() as $shipping_item ){
+        
+        // When "pickup" method is used, we change the order to "pickup" status
+        if( strpos( $shipping_item->get_method_id(), $search ) !== false ){
+            $order->update_status('pickup');
+            break;
+        }
+    }
+}
+
+
