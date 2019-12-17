@@ -1,0 +1,8 @@
+//remove download menu at woocommerce dashboard
+
+add_filter ( 'woocommerce_account_menu_items', 'xhanxeli_remove_my_account_links' );
+function xhanxeli_remove_my_account_links( $menu_links ){
+	unset( $menu_links['downloads'] ); // Disable Downloads
+	return $menu_links;
+ 
+}
