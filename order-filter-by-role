@@ -1,0 +1,103 @@
+//role filter in Woocommerce orders
+
+if ( ! function_exists( 'wc_get_role_order_count' ) ) {
+    // Function to get number of orders of a user rolez
+    function wc_get_role_order_count( $role ) {
+        global $wpdb;
+ 
+        if ( ! isset( get_editable_roles()[ $role ] ) ) {
+            return 0;
+        }
+ 
+        $user_ids = get_users( array( 'role' => $role, 'fields' => 'ID' ) );
+ 
+        if ( ! $user_ids ) {
+            return 0;
+        }
+ 
+        $user_ids = array_map( 'absint', $user_ids );
+        $user_ids = implode( ',', $user_ids );
+ 
+        $count = $wpdb->get_var( $sql = "
+            SELECT COUNT(*)
+            FROM {$wpdb->posts} as posts
+ 
+            LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id
+ 
+            WHERE   meta.meta_key       = '_customer_user'
+            AND     posts.post_type     IN ('" . implode( "','", wc_get_order_types( 'order-count' ) ) . "')
+            AND     posts.post_status   IN ('" . implode( "','", array_keys( wc_get_order_statuses() ) )  . "')
+            AND     meta.meta_value     IN ({$user_ids})
+        " );
+ 
+        return absint( $count );
+    }
+}
+ 
+add_action( 'restrict_manage_posts', 'shop_order_user_role_filter' );
+ 
+function shop_order_user_role_filter() {
+    global $typenow;
+ 
+    if ( in_array( $typenow, wc_get_order_types( 'order-meta-boxes' ) ) ) {
+        $user_role = '';
+ 
+        // Get all user roles
+        $user_roles = array();
+ 
+        foreach ( get_editable_roles() as $key => $values ) {
+            // Only show the role if it has orders
+            if ( wc_get_role_order_count( $key ) > 0 ) {
+                $user_roles[ $key ] = $values['name'];
+            }
+        }
+ 
+        // Set a selected user role
+        if ( ! empty( $_GET['_user_role'] ) ) {
+            $user_role = sanitize_text_field( $_GET['_user_role'] );
+        }
+ 
+        // Display drop down
+        ?><select name="_user_role">
+            <option value=""><?php _e( 'Select a user role', 'woocommerce' ); ?></option><?php
+            foreach ( $user_roles as $key => $value ) {
+                ?><option <?php selected( $user_role, $key ); ?> value="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $value ); ?></option><?php
+            }
+        ?></select><?php
+    }
+}
+ 
+add_filter( 'request', 'shop_order_user_role_request_query' );
+ 
+function shop_order_user_role_request_query( $vars ) {
+    global $typenow;
+ 
+    if ( ! empty( $_GET['_user_role'] ) && in_array( $typenow, wc_get_order_types( 'order-meta-boxes' ) ) ) {
+        // Get user IDs of role
+        $ids = get_users( array( 'role' => sanitize_text_field( $_GET['_user_role'] ), 'fields' => 'ID' ) );
+        $ids = array_map( 'absint', $ids );
+ 
+        // Make sure we have a valid array to work with
+        if ( ! isset( $vars['meta_query'] ) || ! is_array( $vars['meta_query'] ) ) {
+            $vars['meta_query'] = array();
+        }
+ 
+        // Add query to check for _customer_user
+        $vars['meta_query'][] = array(
+            'key'     => '_customer_user',
+            'value'   => $ids,
+            'compare' => 'IN',
+        );
+    }
+ 
+    return $vars;
+}
+
+function set_default_admin_color($user_id) {
+	$args = array(
+		'ID' => $user_id,
+		'admin_color' => 'Midnight'
+	);
+	wp_update_user( $args );
+}
+add_action('user_register', 'set_default_admin_color');
