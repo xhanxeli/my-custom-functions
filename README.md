@@ -1,6 +1,6 @@
 # my-custom-functions
 
-This is used with My Custom Functions BY SPACE X-CHIMP Wordpress plugins. Copy & paste the code to Setting -> PHP Inserter, 
+Use with My Custom Functions BY SPACE X-CHIMP Wordpress plugins. Copy & paste the code to Setting -> PHP Inserter, 
 change OFF to ON then click save button.
 
 I will not take any responsible if your wordpress or woocommerce site damage. By the way, if your website interupt, you can disable
