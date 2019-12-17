@@ -1,4 +1,4 @@
-// Add new posts at Dashboard //
+// Add new posts at Dashboard
 
 add_action( 'woocommerce_account_dashboard', 'xhanxeli_dashboard_addition' );
 function xhanxeli_dashboard_addition() {
