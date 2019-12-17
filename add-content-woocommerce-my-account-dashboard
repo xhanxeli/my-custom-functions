@@ -2,6 +2,6 @@
 
 add_action( 'woocommerce_account_dashboard', 'xhanxeli_dashboard_addition' );
 function xhanxeli_dashboard_addition() {
-echo '<p>YOUR CONTENT HERE</p>';
+echo '<p>YOUR CONTENT HERE...</p>';
     
 }
