@@ -1,0 +1,34 @@
+//add new menu at woocommerce my account dashboard
+
+add_filter ( 'woocommerce_account_menu_items', 'xhanxeli_one_more_link' );
+function xhanxeli_one_more_link( $menu_links ){
+    
+	// we will hook "anyuniquetext123" later
+	$new = array( 'newmenu' => 'New Menu' );
+ 
+	// or in case you need 2 links
+	// $new = array( 'link1' => 'Link 1', 'link2' => 'Link 2' );
+ 
+	// array_slice() is good when you want to add an element between the other ones
+	$menu_links = array_slice( $menu_links, 0, 1, true ) 
+	+ $new 
+	+ array_slice( $menu_links, 1, NULL, true );
+ 
+ 
+	return $menu_links;
+ 
+ 
+}
+ 
+add_filter( 'woocommerce_get_endpoint_url', 'xhanxeli_hook_endpoint', 10, 4 );
+function xhanxeli_hook_endpoint( $url, $endpoint, $value, $permalink ){
+ 
+	if( $endpoint === 'newmenu' ) {
+ 
+		// ok, here is the place for your custom URL, it could be external
+		$url = site_url('destinationurl');
+ 
+	}
+	return $url;
+ 
+}
