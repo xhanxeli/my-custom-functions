@@ -11,20 +11,20 @@ The website will be revert back and the plugins will be disabled (TURN OFF) in p
 
 Thank you!
 
-Add content below hello (username) at woocommerce dashboard (my account)<br>
+<strong>1. Add content below hello (username) at woocommerce dashboard (my account)</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/add-content-woocommerce-my-account-dashboard
 
-Add new menu at woocommerce dashboard menu (my account)<br>
+<strong>2. Add new menu at woocommerce dashboard menu (my account)</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/add-new-menu-at-woocommerce-my-account-dashboard
 
-Change order status to Local Pickup automatically if choosen delivery method is Local Pickup<br>
+<strong>3. Change order status to Local Pickup automatically if choosen delivery method is Local Pickup</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/change-order-status-to-local-pickup-automatically
 
-Filter option for admin backend woocommerce order by role<br>
+<strong>4. Filter option for admin backend woocommerce order by role</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/order-filter-by-role
 
-Remove download menu at woocommerce dashboard (my account)<br>
+<strong>5. Remove download menu at woocommerce dashboard (my account)</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/remove-download-menu-woocommerce-dashboard
 
-Untick different shipping address by default<br>
+<strong>6. Untick different shipping address by default</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/untick-different-shipping-address
