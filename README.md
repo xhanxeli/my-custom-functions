@@ -28,3 +28,6 @@ https://github.com/xhanxeli/my-custom-functions/blob/master/remove-download-menu
 
 <strong>6. Untick different shipping address by default</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/untick-different-shipping-address
+
+<strong>7. Minimum amount per order by user role</strong>
+https://github.com/xhanxeli/my-custom-functions/blob/master/set-minimum-amount-per-order-by-role
