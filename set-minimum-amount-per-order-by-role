@@ -1,0 +1,25 @@
+// Set a minimum amount per order (agent, dropship & stockist)
+add_action( 'woocommerce_check_cart_items', 'set_min_total_per_user_role' );
+function set_min_total_per_user_role() {
+    // Only run in the Cart or Checkout pages
+    if( is_cart() || is_checkout() ) {
+
+        // Set minimum cart total (example RM100)
+        $minimum_cart_total = current_user_can('agent') ? 100 : 100;
+        $minimum_cart_total = current_user_can('dropship') ? 100 : 100;
+        $minimum_cart_total = current_user_can('stockist') ? 100 : 100;
+
+        // Total (before taxes and shipping charges)
+        $total = WC()->cart->subtotal;
+
+        // Add an error notice if cart total is less than the minimum required (example below RM100)
+        if( $total <= $minimum_cart_total  ) {
+            // Display error message
+            wc_add_notice( sprintf( '<strong>Minimum order of %s is required to make a purchase.</strong> <br>
+                Your actual cart amount is: %s',
+                wc_price($minimum_cart_total),
+                wc_price($total)
+            ), 'error' );
+        }
+    }
+}
