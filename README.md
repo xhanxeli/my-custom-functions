@@ -31,3 +31,6 @@ https://github.com/xhanxeli/my-custom-functions/blob/master/untick-different-shi
 
 <strong>7. Minimum amount per order by user role</strong><br>
 https://github.com/xhanxeli/my-custom-functions/blob/master/set-minimum-amount-per-order-by-role
+
+<strong>8. Add Phone Column (billing_phone) in User List</strong><br>
+https://github.com/xhanxeli/my-custom-functions/blob/master/add-phone-column-in-user-list
